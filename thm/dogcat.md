@@ -1,6 +1,6 @@
 # Dogcat
 
-Dogcat is a medium-rated box which involves an LFI and poisoning the User-Agent to get RCE.
+Dogcat is a [medium-rated box on TryHackme](https://tryhackme.com/room/dogcat) which involves an LFI and poisoning the User-Agent to get RCE.
 
 ## Recon
 
@@ -131,11 +131,11 @@ From here we can simply make another request to the same URL with a command for 
 
 ![Executing commands via LFI](./screenshots/dogcat-5.png)
 
-...and get RCE! I used the php oneliner from pentestmonkey, just remember to URLEncode before you send it off.
+...and get RCE! I used the php oneliner from [pentestmonkey](http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet), just remember to URLEncode before you send it off.
 
 ![RCE](./screenshots/dogcat-6.png)
 
-From here you will find a flag.php, where the first flag is placed. The second flag will be one folder up, in /var/www.
+From here you will find a flag.php, where the first flag is placed. The second flag will be one folder up, in /var/www .
 
 # Privesc
 
@@ -143,7 +143,7 @@ Once we have the shell, we of course want to privesc. To start our enumeration, 
 
 ![privesc enumeration](./screenshots/dogcat-7.png)
 
-We can see that we can execute */usr/bin/env* as sudo. A quick peek at GTFObins will show us a way to privesc.
+We can see that we can execute */usr/bin/env* as sudo. A quick peek at [GTFObins](https://gtfobins.github.io/) will show us a way to privesc.
 
 ![privesc](./screenshots/dogcat-8.png)
 
