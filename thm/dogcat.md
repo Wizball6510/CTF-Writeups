@@ -48,7 +48,7 @@ http://<ip>/dog.php
 ```
 As suspected, it returns a picture on an otherwise blank page. From here we can try some LFI.
 
-# LFI
+## LFI
 
 Because at the moment we have to assume that the code appends .php to every request we make in the view, we can "only" get the source of the current pages. These files are *index.php*, *dog.php* and *cat.php*. Because these would all be interpreted when we include them, we have to convert them into some other format. We'll use the php filter functionality to convert the code into Base64. The site also prevents us from putting something in the view without the keywords "dog" or "cat", which is why we have to change our path accordingly:
 ```HTTP
@@ -107,7 +107,7 @@ This returns us another base64 decoded string, this time from /etc/passwd as ver
 ![decoding /etc/passwd base64](./screenshots/dogcat-3.png)
 
 
-# RCE
+## RCE
 
 With this knowledge, we can possibly leverage our LFI into an RCE by adding PHP code in places where there shouldn't normally be any, as the include statement interprets it as PHP without needing the extension. We can try this here by adding some PHP code in the User-Agent of our request and including the webserver log. We can view the Webserver log via the same LFI.
 
@@ -137,7 +137,7 @@ From here we can simply make another request to the same URL with a command for 
 
 From here you will find a flag.php, where the first flag is placed. The second flag will be one folder up, in /var/www .
 
-# Privesc
+## Privesc
 
 Once we have the shell, we of course want to privesc. To start our enumeration, we do a simple sudo -l:
 
@@ -147,7 +147,7 @@ We can see that we can execute */usr/bin/env* as sudo. A quick peek at [GTFObins
 
 ![privesc](./screenshots/dogcat-8.png)
 
-# Container Escape
+## Container Escape
 
 Although we rooted the box, there still seems to be a fourth flag. By running linpeas we can find some unusual scripts in */opt/backups*.
 
